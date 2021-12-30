@@ -1,3 +1,45 @@
+encodedValues = {
+  '&#x5D0;': 1,
+  '&#x5D1;': 2,
+  '&#x5D2;': 3,
+  '&#x5D3;': 4,
+  '&#x5D4;': 5,
+  '&#x5D5;': 6,
+  '&#x5D6;': 7,
+  '&#x5D7;': 8,
+  '&#x5D8;': 9,
+  '&#x5D9;': 10,
+  '&#x5DA;': 20, // ך
+  '&#x5DB;': 20,
+  '&#x5DC;': 30,
+  '&#x5DD;': 40, // ם
+  '&#x5DE;': 40,
+  '&#x5DF;': 50, // ן
+  '&#x5E0;': 50,
+  '&#x5E1;': 60,
+  '&#x5E2;': 70,
+  '&#x5E3;': 80, // ף
+  '&#x5E4;': 80,
+  '&#x5E5;': 90, // ץ
+  '&#x5E6;': 90,
+  '&#x5E7;': 100,
+  '&#x5E8;': 200,
+  '&#x5E9;': 300,
+  '&#x5EA;': 400,
+}
+console.log(encodedValues)
+
+let string = "יצחק";
+gematria = 0
+for (let i = 0; i < string.length; i++) {
+  encodedLetter = he.encode(string[i]);
+  gematria += encodedValues[encodedLetter]
+}
+
+console.log("gematria: ",gematria)
+
+/*
+
 letterValues = {
   א : 1,
   ב : 2,
@@ -29,3 +71,4 @@ letterValues = {
 }
 console.log(letterValues);
 console.log(letterValues["א"]);
+*/
