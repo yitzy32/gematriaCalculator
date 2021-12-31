@@ -1,4 +1,4 @@
-encodedValues = {
+regularEncodedValues = {
   '&#x5D0;': 1,
   '&#x5D1;': 2,
   '&#x5D2;': 3,
@@ -27,16 +27,22 @@ encodedValues = {
   '&#x5E9;': 300,
   '&#x5EA;': 400,
 }
-console.log(encodedValues)
+console.log(regularEncodedValues)
 
-let string = "יצחק";
-gematria = 0
-for (let i = 0; i < string.length; i++) {
-  encodedLetter = he.encode(string[i]);
-  gematria += encodedValues[encodedLetter]
+let string = "שירה";
+
+console.log(string)
+let calculateGematria = function(input, encodedVals) {
+  gematria = 0
+
+  for (let i = 0; i < input.length; i++) {
+    encodedLetter = he.encode(input[i]);
+    gematria += encodedVals[encodedLetter]
+  }
+  return gematria;
 }
-
-console.log("gematria: ",gematria)
+let output = calculateGematria(string, regularEncodedValues);
+console.log(`gematria of ${string} is: ${output}`);
 
 /*
 
