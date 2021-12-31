@@ -29,10 +29,12 @@ regularEncodedValues = {
 }
 console.log(regularEncodedValues)
 
-let string = "שירה";
+let string = "שירה האד";
 
-console.log(string)
 let calculateGematria = function(input, encodedVals) {
+
+  input = trimOffWhiteSpace(input)
+
   gematria = 0
 
   for (let i = 0; i < input.length; i++) {
@@ -44,6 +46,9 @@ let calculateGematria = function(input, encodedVals) {
 let output = calculateGematria(string, regularEncodedValues);
 console.log(`gematria of ${string} is: ${output}`);
 
+function trimOffWhiteSpace(string) {
+  return string.replace(/\s+/g, '');
+}
 /*
 
 letterValues = {
