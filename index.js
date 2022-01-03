@@ -29,11 +29,12 @@ regularEncodedValues = {
 }
 console.log(regularEncodedValues)
 
-let string = "שירה האד";
+let string = "וַֽיְהִי־עֶ֥רֶב וַֽיְהִי־בֹ֖קֶר י֥וֹם שְׁלִישִֽׁי׃";
 
 let calculateGematria = function(input, encodedVals) {
 
   input = trimOffWhiteSpace(input)
+  input = getRidOfExtraUnicodeChars(input)
 
   gematria = 0
 
@@ -48,6 +49,18 @@ console.log(`gematria of ${string} is: ${output}`);
 
 function trimOffWhiteSpace(string) {
   return string.replace(/\s+/g, '');
+}
+
+function getRidOfExtraUnicodeChars(string) {
+  let encodedArray = he.encode(string).split(";");
+  let trimmedString = "";
+  encodedArray.forEach(unicode => {
+    unicode += ";";
+    if (regularEncodedValues[unicode]) {
+      trimmedString += he.decode(unicode);
+    }
+  });
+  return trimmedString;
 }
 /*
 
