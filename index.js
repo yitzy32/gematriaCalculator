@@ -1,4 +1,4 @@
-regularEncodedValues = {
+alephBeisValues = {
   '&#x5D0;': 1,
   '&#x5D1;': 2,
   '&#x5D2;': 3,
@@ -27,7 +27,7 @@ regularEncodedValues = {
   '&#x5E9;': 300,
   '&#x5EA;': 400,
 }
-console.log(regularEncodedValues)
+console.log(alephBeisValues)
 
 let string = "וַֽיְהִי־עֶ֥רֶב וַֽיְהִי־בֹ֖קֶר י֥וֹם שְׁלִישִֽׁי׃";
 
@@ -44,8 +44,6 @@ let calculateGematria = function(input, encodedVals) {
   }
   return gematria;
 }
-let output = calculateGematria(string, regularEncodedValues);
-console.log(`gematria of ${string} is: ${output}`);
 
 function trimOffWhiteSpace(string) {
   return string.replace(/\s+/g, '');
@@ -56,43 +54,12 @@ function getRidOfExtraUnicodeChars(string) {
   let trimmedString = "";
   encodedArray.forEach(unicode => {
     unicode += ";";
-    if (regularEncodedValues[unicode]) {
+    if (alephBeisValues[unicode]) {
       trimmedString += he.decode(unicode);
     }
   });
   return trimmedString;
 }
-/*
 
-letterValues = {
-  א : 1,
-  ב : 2,
-  ג : 3,
-  ד : 4,
-  ה : 5,
-  ו : 6,
-  ז : 7,
-  ח : 8,
-  ט : 9,
-  י : 10,
-  כ : 20,
-  ל : 30,
-  מ : 40,
-  ם : 40,
-  נ : 50,
-  ן : 50,
-  ס : 60,
-  ע : 70,
-  פ : 80,
-  ף : 80,
-  צ : 90,
-  ץ : 90,
-  ק : 100,
-  ר : 200,
-  ש : 300,
-  ת : 400,
-
-}
-console.log(letterValues);
-console.log(letterValues["א"]);
-*/
+let output = calculateGematria(string, alephBeisValues);
+console.log(`gematria of ${string} is: ${output}`);
