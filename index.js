@@ -62,39 +62,39 @@ console.log(atBashValues)
 
 let string = "יִצְחָֽק";
 
-let calculateGematria = function(input, encodedVals) {
-
+function gematria(input, encodedVals) {
   input = filterHebrew(input)
-
-  gematria = 0
-
-  for (let i = 0; i < input.length; i++) {
-    encodedLetter = he.encode(input[i]);
-    gematria += encodedVals[encodedLetter]
-  }
-  return gematria;
+  input = trimWhiteSpace(input)
+  return calculate(input, encodedVals)
 }
 
-function calculateAtBashGematria(input, encodedVals) {
-
+function atBashGematria(input, atBashValues) {
   input = filterHebrew(input)
+  input = trimWhiteSpace(input)
+  return calculate(input, atBashValues)
+}
 
-  gematria = 0
-
-  for (let i = 0; i < input.length; i++) {
-    encodedLetter = he.encode(input[i]);
-    gematria += encodedVals[encodedLetter]
-  }
-  return gematria;
+function trimWhiteSpace(str) {
+  return str.replace(/\s+/g, '');
 }
 
 function filterHebrew(str) {
-  var re = /[\u05D0-\u05EA]/g;
+  var re = /[\u05D0-\u05EA\s]/g;
   return ((str || '').match(re) || []).join('');
 }
 
-let atBashOutput = calculateAtBashGematria(string, atBashValues);
-console.log(`AtBash gematria of ${string} is: ${atBashOutput}`);
+function calculate(str, object) {
+  let gematria = 0;
 
-let output = calculateGematria(string, alephBeisValues);
+  for (let i = 0; i < str.length; i++) {
+    encodedLetter = he.encode(str[i]);
+    gematria += object[encodedLetter]
+  }
+  return gematria;
+}
+
+let output = atBashGematria(string, atBashValues);
+console.log(`AtBash gematria of ${string} is: ${output}`);
+
+output = gematria(string, alephBeisValues);
 console.log(`gematria of ${string} is: ${output}`);
