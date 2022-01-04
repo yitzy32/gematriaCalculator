@@ -64,8 +64,7 @@ let string = "יִצְחָֽק";
 
 let calculateGematria = function(input, encodedVals) {
 
-  input = trimOffWhiteSpace(input)
-  input = getRidOfExtraUnicodeChars(input)
+  input = filterHebrew(input)
 
   gematria = 0
 
@@ -78,8 +77,7 @@ let calculateGematria = function(input, encodedVals) {
 
 function calculateAtBashGematria(input, encodedVals) {
 
-  input = trimOffWhiteSpace(input)
-  input = getRidOfExtraUnicodeChars(input)
+  input = filterHebrew(input)
 
   gematria = 0
 
@@ -90,20 +88,9 @@ function calculateAtBashGematria(input, encodedVals) {
   return gematria;
 }
 
-function trimOffWhiteSpace(string) {
-  return string.replace(/\s+/g, '');
-}
-
-function getRidOfExtraUnicodeChars(string) {
-  let encodedArray = he.encode(string).split(";");
-  let trimmedString = "";
-  encodedArray.forEach(unicode => {
-    unicode += ";";
-    if (alephBeisValues[unicode]) {
-      trimmedString += he.decode(unicode);
-    }
-  });
-  return trimmedString;
+function filterHebrew(str) {
+  var re = /[\u05D0-\u05EA]/g;
+  return ((str || '').match(re) || []).join('');
 }
 
 let atBashOutput = calculateAtBashGematria(string, atBashValues);
