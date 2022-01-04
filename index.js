@@ -29,9 +29,54 @@ alephBeisValues = {
 }
 console.log(alephBeisValues)
 
-let string = "וַֽיְהִי־עֶ֥רֶב וַֽיְהִי־בֹ֖קֶר י֥וֹם שְׁלִישִֽׁי׃";
+atBashValues = {
+  '&#x5D0;': 400,
+  '&#x5D1;': 300,
+  '&#x5D2;': 200,
+  '&#x5D3;': 100,
+  '&#x5D4;': 90,
+  '&#x5D5;': 80,
+  '&#x5D6;': 70,
+  '&#x5D7;': 60,
+  '&#x5D8;': 50,
+  '&#x5D9;': 40,
+  '&#x5DA;': 30, // ך
+  '&#x5DB;': 30,
+  '&#x5DC;': 20,
+  '&#x5DD;': 10, // ם
+  '&#x5DE;': 10,
+  '&#x5DF;': 9, // ן
+  '&#x5E0;': 9,
+  '&#x5E1;': 8,
+  '&#x5E2;': 7,
+  '&#x5E3;': 6, // ף
+  '&#x5E4;': 6,
+  '&#x5E5;': 5, // ץ
+  '&#x5E6;': 5,
+  '&#x5E7;': 4,
+  '&#x5E8;': 3,
+  '&#x5E9;': 2,
+  '&#x5EA;': 1,
+}
+console.log(atBashValues)
+
+let string = "יִצְחָֽק";
 
 let calculateGematria = function(input, encodedVals) {
+
+  input = trimOffWhiteSpace(input)
+  input = getRidOfExtraUnicodeChars(input)
+
+  gematria = 0
+
+  for (let i = 0; i < input.length; i++) {
+    encodedLetter = he.encode(input[i]);
+    gematria += encodedVals[encodedLetter]
+  }
+  return gematria;
+}
+
+function calculateAtBashGematria(input, encodedVals) {
 
   input = trimOffWhiteSpace(input)
   input = getRidOfExtraUnicodeChars(input)
@@ -60,6 +105,9 @@ function getRidOfExtraUnicodeChars(string) {
   });
   return trimmedString;
 }
+
+let atBashOutput = calculateAtBashGematria(string, atBashValues);
+console.log(`AtBash gematria of ${string} is: ${atBashOutput}`);
 
 let output = calculateGematria(string, alephBeisValues);
 console.log(`gematria of ${string} is: ${output}`);
