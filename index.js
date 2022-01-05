@@ -60,10 +60,11 @@ atBashValues = {
 }
 console.log(atBashValues)
 
-let string = "יִצְחָֽק";
+let string = "לַיְּהוּדִ֕ים הָֽיְתָ֥ה אוֹרָ֖ה וְשִׂמְחָ֑ה וְשָׂשֹׂ֖ן וִיקָֽר";
 
 function gematria(input, encodedVals) {
   input = filterHebrew(input)
+  console.log(input)
   input = trimWhiteSpace(input)
   return calculate(input, encodedVals)
 }
@@ -72,6 +73,16 @@ function atBashGematria(input, atBashValues) {
   input = filterHebrew(input)
   input = trimWhiteSpace(input)
   return calculate(input, atBashValues)
+}
+
+function rasheiTeivosGematria(input, encodedVals) {
+  input = filterHebrew(input);
+  let gematria = 0;
+  input.split(" ").forEach(word => {
+    encodedLetter = he.encode(word[0]);
+    gematria += encodedVals[encodedLetter];
+  });
+  return gematria;
 }
 
 function trimWhiteSpace(str) {
@@ -98,3 +109,6 @@ console.log(`AtBash gematria of ${string} is: ${output}`);
 
 output = gematria(string, alephBeisValues);
 console.log(`gematria of ${string} is: ${output}`);
+
+output = rasheiTeivosGematria(string, alephBeisValues)
+console.log(`Gematria of Roshei Teivos for: ${string} is: ${output}`);
