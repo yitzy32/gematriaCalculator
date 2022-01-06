@@ -60,11 +60,10 @@ atBashValues = {
 }
 console.log(atBashValues)
 
-let string = "לַיְּהוּדִ֕ים הָֽיְתָ֥ה אוֹרָ֖ה וְשִׂמְחָ֑ה וְשָׂשֹׂ֖ן וִיקָֽר";
+let string = "וּשְׁנֵ֥י בָנָֽיו: שְׁנֵֽי־בָנָ֣יו מַחְל֤וֹן";
 
 function gematria(input, encodedVals) {
   input = filterHebrew(input)
-  console.log(input)
   input = trimWhiteSpace(input)
   return calculate(input, encodedVals)
 }
@@ -76,13 +75,7 @@ function atBashGematria(input, atBashValues) {
 }
 
 function rasheiTeivosGematria(input, encodedVals) {
-  input = filterHebrew(input);
-  let gematria = 0;
-  input.split(" ").forEach(word => {
-    encodedLetter = he.encode(word[0]);
-    gematria += encodedVals[encodedLetter];
-  });
-  return gematria;
+  return addOneLetterCalculation(input, 0, encodedVals)
 }
 
 function trimWhiteSpace(str) {
@@ -101,6 +94,17 @@ function calculate(str, object) {
     encodedLetter = he.encode(str[i]);
     gematria += object[encodedLetter]
   }
+  return gematria;
+}
+
+function addOneLetterCalculation(str, charIndex, encodedVals) {
+  let gematria = 0;
+  str
+  .split(/[\s\-־|׀:׃]+/)  // split on spaces/dashes/pipes/two dots english and hebrew chars
+  .forEach(word => {
+    encodedLetter = he.encode(word[charIndex]);
+    gematria += encodedVals[encodedLetter];
+  });
   return gematria;
 }
 
