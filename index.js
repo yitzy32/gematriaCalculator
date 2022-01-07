@@ -60,7 +60,7 @@ atBashValues = {
 }
 console.log(atBashValues)
 
-let string = "יצחק בראט";
+let string = "אֶל־בֵּ֣ית ׀ מִשְׁתֵּ֣ה הַיַּ֗יִן";
 
 function gematria(input, encodedVals) {
   input = filterHebrew(input)
@@ -75,11 +75,13 @@ function atBashGematria(input, atBashValues) {
 }
 
 function rasheiTeivosGematria(input, encodedVals) {
-  return addOneLetterCalculation(input, 0, encodedVals)
+  const details = {rashei: true}
+  return addOneLetterCalculation(input, details, encodedVals)
 }
 
 function sofeiTeivosGematria(input, encodedVals) {
-  return addOneLetterCalculation(input, 1, encodedVals)
+  const details = {sofei: true}
+  return addOneLetterCalculation(input, details, encodedVals)
 }
 
 function trimWhiteSpace(str) {
@@ -101,26 +103,20 @@ function calculate(str, object) {
   return gematria;
 }
 
-function addOneLetterCalculation(str, charIndex, encodedVals) {
-  if (charIndex === 0) {
-    let gematria = 0;
-
+function addOneLetterCalculation(str, details, encodedVals) {
+  let gematria = 0;
+  let charIndex;
     str.split(/[\s\-־|׀:׃]+/).forEach(word => {
+      if (details.rashei) {
+        charIndex = 0;
+      } else if (details.sofei) {
+        let letter = word.slice(-1);
+        charIndex = word.lastIndexOf(letter);
+      }
       encodedLetter = he.encode(word[charIndex]);
       gematria += encodedVals[encodedLetter];
     });
     return gematria;
-  } else if (charIndex === 1) {
-    let gematria = 0;
-
-    str.split(/[\s\-־|׀:׃]+/).forEach(word => {
-      let letter = word.slice(-1);
-      charIndex = word.lastIndexOf(letter);
-      encodedLetter = he.encode(word[charIndex]);
-      gematria += encodedVals[encodedLetter];
-    });
-    return gematria;
-  }
 }
 
 let output = atBashGematria(string, atBashValues);
