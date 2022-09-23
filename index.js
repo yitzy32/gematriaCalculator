@@ -58,6 +58,9 @@ atBashValues = {
   '&#x5EA;': 1,
 }
 
+/*
+Start 'Public' Methods
+*/
 function gematria(input, encodedVals) {
   input = filterHebrew(input)
   input = trimWhiteSpace(input)
@@ -79,6 +82,9 @@ function sofeiTeivosGematria(input, encodedVals) {
   const details = {sofei: true}
   return addOneLetterCalculation(input, details, encodedVals)
 }
+/*
+End 'Public' methods
+*/
 
 function trimWhiteSpace(str) {
   return str.replace(/\s+/g, '');
