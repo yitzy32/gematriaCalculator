@@ -27,7 +27,6 @@ alephBeisValues = {
   '&#x5E9;': 300,
   '&#x5EA;': 400,
 }
-console.log(alephBeisValues)
 
 atBashValues = {
   '&#x5D0;': 400,
@@ -58,9 +57,6 @@ atBashValues = {
   '&#x5E9;': 2,
   '&#x5EA;': 1,
 }
-console.log(atBashValues)
-
-let string = "אֶל־בֵּ֣ית ׀ מִשְׁתֵּ֣ה הַיַּ֗יִן";
 
 function gematria(input, encodedVals) {
   input = filterHebrew(input)
@@ -119,14 +115,23 @@ function addOneLetterCalculation(str, details, encodedVals) {
     return gematria;
 }
 
-let output = atBashGematria(string, atBashValues);
-console.log(`AtBash gematria of ${string} is: ${output}`);
+function getGematria(){debugger;
+  const string = document.getElementById('string');
+  const method = document.querySelector('input[name="method"]:checked') || null;
+  const result = document.getElementById('result');
+  if(string.value === ''){
+    result.innerHTML = 'Please enter some text.'
+  } else if(method == null) {
+    result.innerHTML = "Please select an option";
+  } else if(method === 'gematria') {
+    result.innerHTML = gematria(string.value, alephBeisValues);
+  } else if(method === 'atBashGematria'){
+    result.innerHTML = atBashGematria(string.value, atBashValues);
+  } else if(method === 'rasheiTeivosGematria'){
+    result.innerHTML = rasheiTeivosGematria(string.value, alephBeisValues);
+  } else if(method === 'sofeiTeivosGematria'){
+    result.innerHTML = sofeiTeivosGematria(string.value, alephBeisValues);
+  }
+}
 
-output = gematria(string, alephBeisValues);
-console.log(`gematria of ${string} is: ${output}`);
-
-output = rasheiTeivosGematria(string, alephBeisValues)
-console.log(`Gematria of Roshei Teivos for: ${string} is: ${output}`);
-
-output = sofeiTeivosGematria(string, alephBeisValues)
-console.log(`Gematria of Sofei Teivos for: ${string} is: ${output}`);
+document.getElementById('calculate').addEventListener('click', getGematria)
