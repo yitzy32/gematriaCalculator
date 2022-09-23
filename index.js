@@ -115,22 +115,25 @@ function addOneLetterCalculation(str, details, encodedVals) {
     return gematria;
 }
 
-function getGematria(){debugger;
+function getGematria(){
   const string = document.getElementById('string');
   const method = document.querySelector('input[name="method"]:checked') || null;
   const result = document.getElementById('result');
   if(string.value === ''){
     result.innerHTML = 'Please enter some text.'
-  } else if(method == null) {
+  } else if(method.value == null) {
     result.innerHTML = "Please select an option";
-  } else if(method === 'gematria') {
+  } else if(method.value === 'gematria') {
     result.innerHTML = gematria(string.value, alephBeisValues);
-  } else if(method === 'atBashGematria'){
+  } else if(method.value === 'atBashGematria'){
     result.innerHTML = atBashGematria(string.value, atBashValues);
-  } else if(method === 'rasheiTeivosGematria'){
+  } else if(method.value === 'rasheiTeivosGematria'){
     result.innerHTML = rasheiTeivosGematria(string.value, alephBeisValues);
-  } else if(method === 'sofeiTeivosGematria'){
+  } else if(method.value === 'sofeiTeivosGematria'){
     result.innerHTML = sofeiTeivosGematria(string.value, alephBeisValues);
+  } 
+  if(result.innerHTML === '0'){
+    result.innerHTML = 'Please enter valid Hebrew text';
   }
 }
 
