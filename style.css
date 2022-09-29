@@ -9,12 +9,28 @@ textarea {
   color: red;
 }
 
-#container {
-  display: flex;
-  justify-content: space-around;
+#wrapper {
+  position: absolute;
+  top: 40%;
+  left: 30%;
+  margin-top: -50px;
+  margin-left: -50px;
+  width: 500px;
+  height: 300px;
+  overflow: hidden;
+}
+
+#methods {
+  overflow: hidden;
+}
+
+#input {
+  width: 300px;
+  float:left;
 }
 
 #output {
+  top: 90%;
   text-align: center;
   font-family:"Times New Roman", Times, serif;
   font-size: 3em;
