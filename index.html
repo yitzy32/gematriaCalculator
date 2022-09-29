@@ -6,24 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./node_modules/he/he.js"></script>
   <script src="index.js" defer></script>
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 <body>
-  <input type="text" id="string">
-  <br>
-  <input type="radio" id="gematria" name="method" value="gematria">
-  <label for="gematria">gematria</label><br>
+  <div id="container">
+    <div>
+      <textarea type="text" id="string"></textarea>
+    </div>
+    <div>
+      <input type="radio" id="gematria" name="method" value="gematria">
+      <label for="gematria">Regular Gematria</label><br>
 
-  <input type="radio" id="atBashGematria" name="method" value="atBashGematria">
-  <label for="atBashGematria">At Bash Gematria</label><br>
+      <input type="radio" id="atBashGematria" name="method" value="atBashGematria">
+      <label for="atBashGematria">At Bash Gematria</label><br>
 
-  <input type="radio" id="rasheiTeivosGematria" name="method" value="rasheiTeivosGematria">
-  <label for="rasheiTeivosGematria">Rashei Teivos Gematria</label>
+      <input type="radio" id="rasheiTeivosGematria" name="method" value="rasheiTeivosGematria">
+      <label for="rasheiTeivosGematria">Rashei Teivos Gematria</label>
+      <br>
+      <input type="radio" id="sofeiTeivosGematria" name="method" value="sofeiTeivosGematria">
+      <label for="sofeiTeivosGematria">Sofei Teivos Gematria</label>
+      <br><br>
+      <button id="calculate">Calculate</button>
+    </div>
+  </div>
   <br>
-  <input type="radio" id="sofeiTeivosGematria" name="method" value="sofeiTeivosGematria">
-  <label for="sofeiTeivosGematria">Sofei Teivos Gematria</label>
-  <br>
-  <button id="calculate">Calculate</button>
-  <div id="result"></div>
+  <div id="output">
+    <div id="result"></div>
+    <div id="errors"></div>
+  </div>
 </body>
 </html>

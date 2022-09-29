@@ -73,13 +73,15 @@ function atBashGematria(input, atBashValues) {
   return calculate(input, atBashValues)
 }
 
-function rasheiTeivosGematria(input, encodedVals) {
+function rasheiTeivosGematria(input, encodedVals) {debugger;
   const details = {rashei: true}
+  input = trimWhiteSpace(input)
   return addOneLetterCalculation(input, details, encodedVals)
 }
 
 function sofeiTeivosGematria(input, encodedVals) {
   const details = {sofei: true}
+  input = trimWhiteSpace(input)
   return addOneLetterCalculation(input, details, encodedVals)
 }
 /*
@@ -118,17 +120,20 @@ function addOneLetterCalculation(str, details, encodedVals) {
       encodedLetter = he.encode(word[charIndex]);
       gematria += encodedVals[encodedLetter];
     });
-    return gematria;
+    return gematria || 0;
 }
 
 function getGematria(){
   const string = document.getElementById('string');
   const method = document.querySelector('input[name="method"]:checked') || null;
   const result = document.getElementById('result');
+  const errorsList = document.getElementById('errors');
+  const errors = [];
   if(string.value === ''){
-    result.innerHTML = 'Please enter some text.'
-  } else if(method.value == null) {
-    result.innerHTML = "Please select an option";
+    errors.push('Please enter some text.');
+  }
+  if(method == null) {
+    errors.push('Please select an option.');
   } else if(method.value === 'gematria') {
     result.innerHTML = gematria(string.value, alephBeisValues);
   } else if(method.value === 'atBashGematria'){
@@ -137,9 +142,15 @@ function getGematria(){
     result.innerHTML = rasheiTeivosGematria(string.value, alephBeisValues);
   } else if(method.value === 'sofeiTeivosGematria'){
     result.innerHTML = sofeiTeivosGematria(string.value, alephBeisValues);
-  } 
+  }
   if(result.innerHTML === '0'){
-    result.innerHTML = 'Please enter valid Hebrew text';
+    errors.push('Please enter valid Hebrew text.');
+  }
+  if(errors.length){
+    errorsList.innerHTML = errors.join('<br>');
+    result.innerHTML = '';
+  } else {
+    errorsList.innerHTML = '';
   }
 }
 
