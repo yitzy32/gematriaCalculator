@@ -73,15 +73,15 @@ function atBashGematria(input, atBashValues) {
   return calculate(input, atBashValues)
 }
 
-function rasheiTeivosGematria(input, encodedVals) {debugger;
+function rasheiTeivosGematria(input, encodedVals) {
   const details = {rashei: true}
-  input = trimWhiteSpace(input)
+  input = input.trim()
   return addOneLetterCalculation(input, details, encodedVals)
 }
 
 function sofeiTeivosGematria(input, encodedVals) {
   const details = {sofei: true}
-  input = trimWhiteSpace(input)
+  input = input.trim()
   return addOneLetterCalculation(input, details, encodedVals)
 }
 /*
